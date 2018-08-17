@@ -1,6 +1,5 @@
 package com.ameykolhe.bookmymovie.server;
 
-import Utilities.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,12 +10,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
 
-import Utilities.DatabaseMGR;
+import com.ameykolhe.bookmymovie.utilities.DatabaseMGR;
 
 public class LoginHandler implements Runnable {
 
@@ -37,6 +35,7 @@ public class LoginHandler implements Runnable {
 		this.s = s;
 	}
 	
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	Integer loginOrSignup() throws IOException, ClassNotFoundException, SQLException
 	{
 		String msg = dis.readUTF().toString();
@@ -91,51 +90,56 @@ public class LoginHandler implements Runnable {
 			String query;
 			query = "select * from User where userName = '" + ar.get(0) + "';" ;
 			ResultSet rs = DatabaseMGR.executeQuery(query);
-			ResultSetMetaData rmd = rs.getMetaData();
 			System.out.print("Data Retrived From Database : ");
-			rs.next();
-			System.out.print(rs.getString("userName") + " " + rs.getString("password") + " ");
-			System.out.println(rs.getInt("type"));
-			if(rs.getRow() == 1)
+			if(rs.next())
 			{
-				if(rs.getString("userName").equals(ar.get(0)) )
+				System.out.print(rs.getString("userName") + " " + rs.getString("password") + " ");
+				System.out.println(rs.getInt("type"));
+				if(rs.getRow() == 1)
 				{
-					if(rs.getString("password").equals(ar.get(1)))
+					if(rs.getString("userName").equals(ar.get(0)) )
 					{
-						if(rs.getInt("type") == 0)
+						if(rs.getString("password").equals(ar.get(1)))
 						{
-							UserHandler obj = new UserHandler(s,dis,dos,ois,oos,rs.getString("userName"),rs.getString("password"),rs.getInt("type"));
-							Thread t = new Thread(obj);
-							t.setName(rs.getString("userName"));
-							t.start();
-							dos.writeUTF("Login Successful");
-							oos.writeObject(rs.getInt("type"));
-							return new Integer(2);
+							if(rs.getInt("type") == 0)
+							{
+								UserHandler obj = new UserHandler(s,dis,dos,ois,oos,rs.getString("userName"),rs.getString("password"),rs.getInt("type"), rs.getInt("userID"));
+								Thread t = new Thread(obj);
+								t.setName(rs.getString("userName"));
+								t.start();
+								dos.writeUTF("Login Successful");
+								oos.writeObject(rs.getInt("type"));
+								return new Integer(2);
+							}
+							else if(rs.getInt("type") == 1)
+							{
+								OwnerHandler obj = new OwnerHandler(s,dis,dos,ois,oos,rs.getString("userName"),rs.getString("password"),rs.getInt("type"),rs.getInt("userID"));
+								Thread t = new Thread(obj);
+								t.setName(rs.getString("userName"));
+								t.start();
+								dos.writeUTF("Login Successful");
+								oos.writeObject(rs.getInt("type"));
+								return new Integer(2);
+							}
 						}
-						else if(rs.getInt("type") == 1)
+						else
 						{
-							OwnerHandler obj = new OwnerHandler(s,dis,dos,ois,oos,rs.getString("userName"),rs.getString("password"),rs.getInt("type"));
-							Thread t = new Thread(obj);
-							t.setName(rs.getString("userName"));
-							t.start();
-							dos.writeUTF("Login Successful");
-							oos.writeObject(rs.getInt("type"));
-							return new Integer(2);
+							dos.writeUTF("Invalid Password");
 						}
 					}
 					else
 					{
-						dos.writeUTF("Invalid Password");
+						dos.writeUTF("Invalid UserName");
 					}
 				}
 				else
 				{
-					dos.writeUTF("Invalid UserName");
+					dos.writeUTF("Invalid Username");
 				}
 			}
 			else
 			{
-				dos.writeUTF("Invalid Username");
+				dos.writeUTF("Invalid UserNmae");
 			}
 		}
 		return new Integer(0);
@@ -153,7 +157,6 @@ public class LoginHandler implements Runnable {
 				stat = loginOrSignup();
 				
 			} catch (ClassNotFoundException | IOException | SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(stat.intValue() == 2)
