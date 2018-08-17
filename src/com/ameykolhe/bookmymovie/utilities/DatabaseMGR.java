@@ -23,7 +23,6 @@ public class DatabaseMGR {
 			stmt = conn.createStatement();
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
