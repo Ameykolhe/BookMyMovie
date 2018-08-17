@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 public class Server {
 
+	@SuppressWarnings("resource")
 	public static void main(String []args) throws IOException, SQLException, ClassNotFoundException
 	{
 		ServerSocket ss = new ServerSocket(1234);

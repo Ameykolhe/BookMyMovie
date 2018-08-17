@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
+	@SuppressWarnings({ "rawtypes", "unchecked", "resource" })
 	public static void main(String []args) throws UnknownHostException, IOException, ClassNotFoundException
 	{
 		Scanner sc = new Scanner(System.in);
@@ -30,7 +31,6 @@ public class Client {
 			int choice = sc.nextInt();
 			ArrayList ar = new ArrayList();
 			String username,password,type;
-			String loginStatus = null;
 			String str;
 			boolean fl = false;
 			switch(choice)
@@ -88,30 +88,10 @@ public class Client {
 				System.out.println("Breaking Loop");
 				break;
 			}
-			clearConsole();
+			
 		}
 		System.out.println("Stopping Login Page");
 	}
 	
 	
-	final static void clearConsole()
-	{
-	    try
-	    {
-	        final String os = System.getProperty("os.name");
-
-	        if (os.contains("Windows"))
-	        {
-	            Runtime.getRuntime().exec("cls");
-	        }
-	        else
-	        {
-	            Runtime.getRuntime().exec("clear");
-	        }
-	    }
-	    catch (final Exception e)
-	    {
-	        //  Handle any exceptions.
-	    }
-	}
 }
