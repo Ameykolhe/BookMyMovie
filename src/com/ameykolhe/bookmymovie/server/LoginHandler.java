@@ -6,16 +6,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.net.Socket;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 
 import com.ameykolhe.bookmymovie.utilities.DatabaseMGR;
-import com.sun.java_cup.internal.runtime.Symbol;
 
 public class LoginHandler implements Runnable {
 
@@ -142,6 +138,7 @@ public class LoginHandler implements Runnable {
 			}
 			else
 			{
+				
 				dos.writeUTF("Invalid UserName");
 			}
 		}

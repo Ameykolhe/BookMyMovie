@@ -143,16 +143,12 @@ public class LoginFrame extends JFrame {
 							Thread t = new Thread(ui);
 							t.start();
 						}
+						dispose();
 					}
-					else
-					{
-						Font f = new Font("Serif",Font.ITALIC,10);
-						MSG = new JLabel(str);
-						MSG.setBounds(50, 80, 300, 20);
-						add(MSG);
-					}
-					
-					//dispose();
+					Font f = new Font("Serif",Font.ITALIC,10);
+					MSG = new JLabel(str);
+					MSG.setBounds(50, 80, 300, 20);
+					add(MSG);
 				}
 				catch(Exception e)
 				{

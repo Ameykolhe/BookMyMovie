@@ -22,7 +22,7 @@ public class OwnerFrame extends JFrame implements Runnable{
 	public OwnerFrame(Socket s,DataInputStream dis,DataOutputStream dos,ObjectInputStream ois,ObjectOutputStream oos , String userName) {
 		super("Owner" + userName);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 450, 300);		
+		setBounds(0, 0, 1024, 768);	
 		
 		this.dis = dis;
 		this.dos = dos;

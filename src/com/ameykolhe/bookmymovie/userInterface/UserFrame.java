@@ -22,7 +22,7 @@ public class UserFrame extends JFrame implements Runnable{
 	public UserFrame(Socket s,DataInputStream dis,DataOutputStream dos,ObjectInputStream ois,ObjectOutputStream oos , String userName) {
 		super("User" + userName);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 450, 300);		
+		setBounds(0, 0, 1024, 768);		
 		
 		this.dis = dis;
 		this.dos = dos;
