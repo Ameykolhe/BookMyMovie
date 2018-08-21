@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ameykolhe.bookmymovie.utilities.DatabaseMGR;
+import com.sun.java_cup.internal.runtime.Symbol;
 
 public class LoginHandler implements Runnable {
 
@@ -35,7 +36,7 @@ public class LoginHandler implements Runnable {
 		this.s = s;
 	}
 	
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	Integer loginOrSignup() throws IOException, ClassNotFoundException, SQLException
 	{
 		String msg = dis.readUTF().toString();
@@ -93,6 +94,7 @@ public class LoginHandler implements Runnable {
 			System.out.print("Data Retrived From Database : ");
 			if(rs.next())
 			{
+				System.out.println("retreived");
 				System.out.print(rs.getString("userName") + " " + rs.getString("password") + " ");
 				System.out.println(rs.getInt("type"));
 				if(rs.getRow() == 1)
@@ -103,6 +105,7 @@ public class LoginHandler implements Runnable {
 						{
 							if(rs.getInt("type") == 0)
 							{
+								System.out.println("IN USer login");
 								UserHandler obj = new UserHandler(s,dis,dos,ois,oos,rs.getString("userName"),rs.getString("password"),rs.getInt("type"), rs.getInt("userID"));
 								Thread t = new Thread(obj);
 								t.setName(rs.getString("userName"));
@@ -134,12 +137,12 @@ public class LoginHandler implements Runnable {
 				}
 				else
 				{
-					dos.writeUTF("Invalid Username");
+					dos.writeUTF("Invalid UserName");
 				}
 			}
 			else
 			{
-				dos.writeUTF("Invalid UserNmae");
+				dos.writeUTF("Invalid UserName");
 			}
 		}
 		return new Integer(0);
@@ -152,7 +155,7 @@ public class LoginHandler implements Runnable {
 		
 		while(true)
 		{
-
+			stat = 0;
 			try {
 				stat = loginOrSignup();
 				

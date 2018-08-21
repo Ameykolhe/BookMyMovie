@@ -40,7 +40,7 @@ public class UserHandler implements Runnable {
 	}
 	
 	
-	@SuppressWarnings({ "deprecation", "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	void bookTicket() throws IOException, SQLException, ClassNotFoundException
 	{
 		System.out.println("In bookTicket");

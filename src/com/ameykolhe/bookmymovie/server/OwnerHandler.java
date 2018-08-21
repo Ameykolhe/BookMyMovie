@@ -40,7 +40,6 @@ public class OwnerHandler implements Runnable {
 	}
 	
 	
-	@SuppressWarnings({ "unused", "null", "deprecation" })
 	void scheduleMovie() throws SQLException, IOException
 	{
 		System.out.println("In Schedule Movie");

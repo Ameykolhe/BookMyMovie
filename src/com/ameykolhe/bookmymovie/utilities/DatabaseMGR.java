@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@SuppressWarnings("deprecation")
+
 public class DatabaseMGR {
 	static final String juser = "root";
 	static final String jpass = "1379";

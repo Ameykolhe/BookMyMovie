@@ -33,7 +33,7 @@ public class UserInterface implements Runnable{
 		this.s = s;
 	}
 	
-	@SuppressWarnings({ "unchecked", "deprecation", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	void bookTicket() throws IOException, ClassNotFoundException, ParseException, InterruptedException
 	{	
 		ArrayList <String> cityNames = (ArrayList<String>)ois.readObject();
