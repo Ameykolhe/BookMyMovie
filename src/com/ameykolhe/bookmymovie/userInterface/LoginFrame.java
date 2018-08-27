@@ -16,6 +16,7 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -45,8 +46,7 @@ public class LoginFrame extends JFrame {
 	JTextField userID;
 	JPasswordField password;
 	
-	
-	JFrame signUPFrame;
+	SignUPFrame signUPFrame;
 	
 	JButton getSignINButton()
 	{
@@ -59,13 +59,10 @@ public class LoginFrame extends JFrame {
 	}
 	
 	
-	public static void main(String[] args) throws UnknownHostException, IOException {
-		
-		LoginFrame frame = new LoginFrame();
-		frame.setVisible(true);
-		
+	LoginFrame getLoginFrame()
+	{
+		return this;
 	}
-
 	
 	
 	@SuppressWarnings({ "unused", "resource" })
@@ -145,10 +142,7 @@ public class LoginFrame extends JFrame {
 						}
 						dispose();
 					}
-					Font f = new Font("Serif",Font.ITALIC,10);
-					MSG = new JLabel(str);
-					MSG.setBounds(50, 80, 300, 20);
-					add(MSG);
+					JOptionPane.showMessageDialog(new JFrame(),str);
 				}
 				catch(Exception e)
 				{
@@ -162,6 +156,18 @@ public class LoginFrame extends JFrame {
 		signUP = new JButton("Sign UP");
 		signUP.setBounds(280, 320, 100, 20);
 		
+		signUP.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				setVisible(false);
+				signUPFrame = new SignUPFrame(s,dis,dos,ois,oos,getLoginFrame());
+				signUPFrame.setVisible(true);
+			}
+			
+		});
+		
 		add(welcomeMSG);
 		add(passwordLabel);
 		add(userIDLabel);
@@ -171,10 +177,15 @@ public class LoginFrame extends JFrame {
 		add(signIN);
 		
 		
-		
-		setVisible(true);
 	}
 	
+	
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		
+		LoginFrame frame = new LoginFrame();
+		frame.setVisible(true);
+		
+	}
 	
 
 }
