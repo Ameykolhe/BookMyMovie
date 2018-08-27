@@ -161,11 +161,8 @@ public class OwnerHandler implements Runnable {
 						e.printStackTrace();
 					}	
 					break;
+					
 				case 2:
-					
-					
-					break;
-				case 3:
 					flag = true;
 					break;
 			}

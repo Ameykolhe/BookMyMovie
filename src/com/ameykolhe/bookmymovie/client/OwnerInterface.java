@@ -90,7 +90,7 @@ public class OwnerInterface implements Runnable{
 		
 		while(true)
 		{
-			System.out.println("Enter : 1: Schedule Movie\n\t2: Create new Theatre\n\t3: Exit");
+			System.out.println("Enter : 1: Schedule Movie\n\t2: Exit");
 			int choice = sc.nextInt();
 			switch(choice)
 			{
@@ -105,12 +105,8 @@ public class OwnerInterface implements Runnable{
 					break;
 					
 				case 2:
-					
-					
-					
-				case 3:
 					try {
-						dos.writeUTF("3");
+						dos.writeUTF("2");
 						flag = true;
 					} catch (IOException e) {
 						e.printStackTrace();
